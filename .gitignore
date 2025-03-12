@@ -1,5 +1,3 @@
 /target
 .env
-/src/rate_limiter.rs
-/src/rules.lua
-/src/rspamd.rs
+src/rspamd.rs
