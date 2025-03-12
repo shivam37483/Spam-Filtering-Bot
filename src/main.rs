@@ -89,7 +89,10 @@ async fn check_message(
                 log::error!("Failed to update sender score: {}", e);
             }
             bot.send_message(msg.chat.id, "Spam detected! Admins notified.").await?;
-            notify_admins(&bot, msg.chat.id, text, &rule_manager, &user_id).await?;
+            match notify_admins(&bot, msg.chat.id, text, &rule_manager, &user_id).await {
+                Ok(_) => log::info!("Successfully notified admins for spam message: '{}'", text),
+                Err(e) => log::error!("Failed to notify admins for spam message '{}': {}", text, e),
+            }
         } else {
             if let Err(e) = rule_manager.increment_sender_score(&user_id, false) {
                 log::error!("Failed to update sender score: {}", e);
@@ -97,6 +100,11 @@ async fn check_message(
         }
     }
     Ok(())
+}
+
+
+async fn handle_new_chat_members(_bot: Bot, msg: Message) {
+    log::info!("Bot added to chat: {:?}", msg.chat);
 }
 
 #[tokio::main]
@@ -133,6 +141,13 @@ async fn main() {
                             check_message(bot, msg, rule_manager).await
                         }
                     }
+                }),
+        )
+        .branch(
+            dptree::filter(|msg: Message| msg.new_chat_members().is_some() && !msg.new_chat_members().unwrap().is_empty())
+                .endpoint(|bot: Bot, msg: Message| async move {
+                    handle_new_chat_members(bot, msg).await;
+                    Ok(())
                 }),
         );
 

@@ -65,7 +65,7 @@ impl RuleManager {
 
     pub fn increment_sender_score(&self, user_id: &str, is_spam: bool) -> Result<()> {
         let conn = self.conn.lock().unwrap();
-        let increment = if is_spam { 1 } else { -1 };
+        let increment = if is_spam { 1 } else { 0 }; // Only increment for spam, don’t decrement
         conn.execute(
             "INSERT INTO senders (user_id, spam_score, message_count)
              VALUES (?1, ?2, 1)

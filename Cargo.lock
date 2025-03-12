@@ -1388,11 +1388,8 @@ dependencies = [
  "dotenv",
  "env_logger",
  "log",
- "reqwest",
  "rlua",
  "rusqlite",
- "serde",
- "serde_json",
  "teloxide",
  "tokio",
 ]
