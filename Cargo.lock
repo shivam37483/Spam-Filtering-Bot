@@ -1391,6 +1391,7 @@ dependencies = [
  "rlua",
  "rusqlite",
  "teloxide",
+ "tempfile",
  "tokio",
 ]
 
