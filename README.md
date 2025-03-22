@@ -2,7 +2,7 @@
 
 ## Overview
 
-`spam-bot-mvp` is a Telegram spam detection bot built as a Minimum Viable Product (MVP). The bot monitors messages in Telegram group chats, detects spam using custom Lua-based rules, and notifies administrators when spam is detected. It also provides commands for users to report spam and for admins to add custom rules, making it a flexible and extensible spam filtering solution.
+`spam-bot-mvp` is a Telegram spam detection bot, which monitors messages in Telegram group chats, detects spam using custom Lua-based rules, and notifies administrators when spam is detected. It also provides commands for users to report spam and for admins to add custom rules, making it a flexible and extensible spam filtering solution.
 
 The bot is written in Rust using the `teloxide` framework for Telegram API interactions, `rusqlite` for persistent storage, and `rlua` for evaluating custom spam rules. It features a modular design with separate components for rule management, utility functions, and bot logic, ensuring maintainability and scalability.
 
