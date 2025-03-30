@@ -93,8 +93,6 @@ The bot is written in Rust using the `teloxide` framework for Telegram API inter
     cargo run
     ```
 
-    - The bot will start and print "Bot started!" to the console.
-
 7. Add the Bot to a Telegram Group
    - Add the bot to a Telegram group via its username (e.g., **@spam_detection_rapamd_bot**).
    - Make the bot an admin in the group to fetch the admin list (required for private notifications).
